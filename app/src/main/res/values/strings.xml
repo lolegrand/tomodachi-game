@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Tomodachi_Game</string>
+    <string name="ma_button_character">Personnage</string>
+    <string name="ma_button_equipement">Equipement</string>
+    <string name="ma_button_play">Gacha !!!</string>
+    <string name="ma_button_help">Aide</string>
+</resources>
