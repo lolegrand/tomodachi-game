@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -21,7 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ma_button_character"
-        android:id="@+id/ma_button_character"/>
+        android:id="@+id/ma_button_character"
+        android:onClick="buttonCharacter"/>
 
     <Button
         app:layout_constraintBottom_toTopOf="@id/ma_space"
@@ -31,7 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ma_button_equipement"
-        android:id="@+id/ma_button_equipement"/>
+        android:id="@+id/ma_button_equipement"
+        android:onClick="buttonEquipment"/>
 
     <Button
         app:layout_constraintLeft_toLeftOf="parent"
@@ -41,7 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ma_button_play"
-        android:id="@+id/ma_button_play"/>
+        android:id="@+id/ma_button_play"
+        android:onClick="buttonPlay"/>
 
     <Button
         app:layout_constraintLeft_toLeftOf="parent"
@@ -51,7 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ma_button_help"
-        android:id="@+id/ma_button_help"/>
+        android:id="@+id/ma_button_help"
+        android:onClick="buttonHelp"/>
 
     <Space
         app:layout_constraintTop_toTopOf="parent"
