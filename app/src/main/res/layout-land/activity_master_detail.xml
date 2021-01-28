@@ -10,30 +10,31 @@
     <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.50"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
         android:id="@+id/guideline1"
         />
 
     <FrameLayout
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/guideline1"
+        app:layout_constraintLeft_toRightOf="@id/guideline1"
+        app:layout_constraintRight_toRightOf="parent"
 
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:id="@+id/mda_fragment_detail"
         android:background="@drawable/common"/>
 
+
     <FrameLayout
         android:id="@+id/mda_fragment_master"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
 
-        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mda_fragment_detail" />
-
-
+        app:layout_constraintRight_toLeftOf="@id/guideline1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 
 
 

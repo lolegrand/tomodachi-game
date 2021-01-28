@@ -6,26 +6,25 @@ import android.os.Bundle
 import android.view.View
 import fr.iut.tomodachi_game.R
 
+const val TYPE = "tomodachigame.TYPE"
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        supportActionBar?.hide()
         setContentView(R.layout.activity_main)
-
-
     }
 
     fun buttonCharacter(view: View) {
         val intent = Intent(this, MasterDetailActivity::class.java).apply {
-            putExtra( "TYPE","character" )
+            putExtra( TYPE,"character" )
         }
         startActivity(intent)
     }
 
     fun buttonEquipment(view: View) {
         val intent = Intent(this, MasterDetailActivity::class.java).apply {
-            putExtra("TYPE","equipment")
+            putExtra(TYPE,"equipment")
         }
         startActivity(intent)
     }
