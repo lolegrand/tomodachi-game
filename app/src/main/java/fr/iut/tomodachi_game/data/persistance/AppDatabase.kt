@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import fr.iut.tomodachi_game.R
 import fr.iut.tomodachi_game.TomodachiGameApplication
 import fr.iut.tomodachi_game.data.*
 import fr.iut.tomodachi_game.data.persistance.converter.DateToLongConverter
@@ -16,8 +17,8 @@ import java.util.*
 @TypeConverters(DateToLongConverter::class, RarityToIntConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun characterDAO(): CharacterDAO
-    abstract fun equipmentDAO(): EquipmentDAO
+    abstract fun appDAO(): AppDAO
+
 
     companion object{
         private lateinit var application: Application
@@ -52,7 +53,7 @@ abstract class AppDatabase : RoomDatabase() {
 
 
         private fun toPopulateDB() {
-            getInstance().characterDAO().apply {
+            getInstance().appDAO().apply {
                 insertCharacter(Character(
                         "Yuzaki, Nasa",
                         Rarity.MYTHICS,
@@ -75,9 +76,9 @@ abstract class AppDatabase : RoomDatabase() {
                         false))
             }
 
-            getInstance().equipmentDAO().apply {
-                insertEquipment(Equipment("Bonclier",Rarity.COMMON,Date(555555),""))
-
+            getInstance().appDAO().apply {
+                insertEquipment(Equipment("Fer Bouclier",Rarity.COMMON,Date(555555), R.drawable.item__25, null))
+                insertEquipment(Equipment("Bois Bonclier",Rarity.COMMON,Date(555555), R.drawable.item__00, null))
             }
         }
 

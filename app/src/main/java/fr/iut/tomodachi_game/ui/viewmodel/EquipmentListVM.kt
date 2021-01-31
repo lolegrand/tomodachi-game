@@ -2,11 +2,11 @@ package fr.iut.tomodachi_game.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import fr.iut.tomodachi_game.data.persistance.AppDatabase
-import fr.iut.tomodachi_game.data.persistance.EquipmentRepository
+import fr.iut.tomodachi_game.data.persistance.AppRepository
 
 class EquipmentListVM : ViewModel(){
-    private val myRepo = EquipmentRepository(AppDatabase.getInstance().equipmentDAO())
+    private val myRepo = AppRepository(AppDatabase.getInstance().appDAO())
 
-    val equipments = myRepo.getAll()
+    val equipments = myRepo.getAllEquipment()
 
 }

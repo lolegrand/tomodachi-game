@@ -1,15 +1,13 @@
 package fr.iut.tomodachi_game.ui.viewmodel
 
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import fr.iut.tomodachi_game.data.Character
 import fr.iut.tomodachi_game.data.persistance.AppDatabase
-import fr.iut.tomodachi_game.data.persistance.CharacterRepository
+import fr.iut.tomodachi_game.data.persistance.AppRepository
 
 class CharacterListVM: ViewModel() {
-    private val myRepo = CharacterRepository(AppDatabase.getInstance().characterDAO())
+    private val myRepo = AppRepository(AppDatabase.getInstance().appDAO())
 
-    val characters = myRepo.getAll()
+    val characters = myRepo.getAllCharacter()
 
 
 }

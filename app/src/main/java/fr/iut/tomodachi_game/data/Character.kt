@@ -1,5 +1,6 @@
 package fr.iut.tomodachi_game.data
 
+import android.util.Log
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -13,17 +14,4 @@ data class Character(val nom: String,
                 val obtainDate: Date,
                 val imageUrl : String,
                 val isMain : Boolean,
-                @PrimaryKey(autoGenerate = true) val characterId: Long = NEW_CHARACTER_ID) {
-
-
-    @Ignore var equipements = ArrayList<Equipment>()
-
-    fun toEquip(equipement: Equipment){
-        if(equipements.size <= 4)
-            equipements.add(equipement)
-    }
-
-    fun unequip(equipement: Equipment){
-        equipements.remove(equipement)
-    }
-}
+                @PrimaryKey(autoGenerate = true) val characterId: Long = NEW_CHARACTER_ID)

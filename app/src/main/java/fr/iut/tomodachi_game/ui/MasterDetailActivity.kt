@@ -2,6 +2,7 @@ package fr.iut.tomodachi_game.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import fr.iut.tomodachi_game.R
@@ -15,7 +16,7 @@ import fr.iut.tomodachi_game.ui.fragment.EquipmentDetailFragment
 import fr.iut.tomodachi_game.ui.fragment.EquipmentMasterFragment
 import java.util.*
 
-class MasterDetailActivity : AppCompatActivity(), CharacterMasterFragment.OnInterractionListener, EquipmentMasterFragment.OnInterractionListener {
+class MasterDetailActivity : AppCompatActivity(), CharacterMasterFragment.OnInterractionListener, EquipmentMasterFragment.OnInterractionListener, CharacterDetailFragment.OnInterractionListener {
 
 
     private val myDatabase = AppDatabase.getInstance()
@@ -33,36 +34,46 @@ class MasterDetailActivity : AppCompatActivity(), CharacterMasterFragment.OnInte
         if(type == "character"){
             myMaster = CharacterMasterFragment()
             (myMaster as CharacterMasterFragment).listener = this
-            //myDetail = CharacterDetailFragment.newInstance(Character("Unknown", Rarity.COMMON, Date(0),"None",false))
+            myDetail = CharacterDetailFragment()
         }else{
             myMaster = EquipmentMasterFragment()
             (myMaster as EquipmentMasterFragment).listener = this
-            //myDetail = EquipmentDetailFragment.newInstance(Equipment("Unknown", Rarity.COMMON, Date(0),"None"))
+            myDetail= EquipmentDetailFragment()
         }
 
         initView()
     }
 
     fun initView(){
-
-        if(supportFragmentManager.findFragmentById(R.id.mda_fragment_detail) == null){
-            //supportFragmentManager.beginTransaction().add(R.id.mda_fragment_detail, myDetail).commit()
-        }
-
         if(supportFragmentManager.findFragmentById(R.id.mda_fragment_master) == null){
             supportFragmentManager.beginTransaction().add(R.id.mda_fragment_master, myMaster).commit()
+            supportFragmentManager.beginTransaction().add(R.id.mda_fragment_detail, myDetail).commit()
         }
     }
 
     override fun onCharacterSelected(id: Long) {
-        val myDetail = CharacterDetailFragment.newInstance(id)
+        myDetail = CharacterDetailFragment.newInstance(id)
+        (myDetail as CharacterDetailFragment).listener = this
         supportFragmentManager.beginTransaction().replace(R.id.mda_fragment_detail, myDetail).commit()
     }
 
     override fun onEquipmentSelected(id: Long) {
-        val myDetail = EquipmentDetailFragment.newInstance(id)
+        if(myDetail is EquipmentDetailFragment){
+            myDetail = EquipmentDetailFragment.newInstance(id)
+            supportFragmentManager.beginTransaction().replace(R.id.mda_fragment_detail, myDetail).commit()
+        }else{
+            (myDetail as CharacterDetailFragment).equipToCharacter(id)
+            myMaster = CharacterMasterFragment()
+            (myMaster as CharacterMasterFragment).listener = this
+            supportFragmentManager.beginTransaction().replace(R.id.mda_fragment_master, myMaster).commit()
+        }
+    }
 
-        supportFragmentManager.beginTransaction().replace(R.id.mda_fragment_detail, myDetail).commit()
+
+    override fun onClickEquipment() {
+        myMaster = EquipmentMasterFragment()
+        (myMaster as EquipmentMasterFragment).listener = this
+        supportFragmentManager.beginTransaction().replace(R.id.mda_fragment_master, myMaster).commit()
     }
 
 

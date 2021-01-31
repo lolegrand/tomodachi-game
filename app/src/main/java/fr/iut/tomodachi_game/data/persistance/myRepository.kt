@@ -7,23 +7,24 @@ import java.util.concurrent.Executors
 
 val IO_EXECUTOR: ExecutorService = Executors.newSingleThreadExecutor()
 
-class CharacterRepository(private val characterDao: CharacterDAO) {
-    fun insert(character: Character) = IO_EXECUTOR.execute{characterDao.insertCharacter(character) }
-    fun delete(character: Character) = IO_EXECUTOR.execute{characterDao.deleteCharacter(character) }
-    fun update(character: Character) = IO_EXECUTOR.execute{characterDao.updateCharacter(character) }
+class AppRepository(private val appDao: AppDAO) {
+    fun insertCharacter(character: Character) = IO_EXECUTOR.execute{appDao.insertCharacter(character) }
+    fun deleteCharacter(character: Character) = IO_EXECUTOR.execute{appDao.deleteCharacter(character) }
+    fun updateCharacter(character: Character) = IO_EXECUTOR.execute{appDao.updateCharacter(character) }
 
-    fun findById(characterId: Long) = characterDao.findCharacterById(characterId)
-    fun getAll() = characterDao.getAllCharacter()
+    fun findCharacterById(characterId: Long) = appDao.findCharacterById(characterId)
+    fun getAllCharacter() = appDao.getAllCharacter()
 
-    fun getCharacterWithEquipments(id : Long) = characterDao.getCharacterWithEquipments(id)
+    fun getCharacterWithEquipments(id : Long) = appDao.getCharacterWithEquipments(id)
+
+    fun insertEquipment(equipment: Equipment) = IO_EXECUTOR.execute { appDao.insertEquipment(equipment) }
+    fun deleteEquipment(equipment: Equipment) = IO_EXECUTOR.execute { appDao.deleteEquipment(equipment) }
+    fun updateEquipment(equipment: Equipment) = IO_EXECUTOR.execute { appDao.updateEquipment(equipment) }
+
+    fun findEquipmentById(id : Long) = appDao.findEquipmentById(id)
+    fun getAllEquipment() =  appDao.getAllEquipment()
+
+
+
 }
 
-class EquipmentRepository(private val equipmentDAO: EquipmentDAO){
-    fun insert(equipment: Equipment) = IO_EXECUTOR.execute { equipmentDAO.insertEquipment(equipment) }
-    fun delete(equipment: Equipment) = IO_EXECUTOR.execute { equipmentDAO.deleteEquipment(equipment) }
-    fun update(equipment: Equipment) = IO_EXECUTOR.execute { equipmentDAO.updateEquipment(equipment) }
-
-    fun findEquipmentById(id : Long) = equipmentDAO.findEquipmentById(id)
-    fun getAll() =  equipmentDAO.getAllEquipment()
-
-}
