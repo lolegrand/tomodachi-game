@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import fr.iut.tomodachi_game.R
 
 import fr.iut.tomodachi_game.data.Equipment
+import fr.iut.tomodachi_game.databinding.FragmentEquipmentDetailBinding
+import fr.iut.tomodachi_game.databinding.FragmentEquipmentMasterBinding
 import fr.iut.tomodachi_game.ui.utils.EquipmentListViewAdapter
 import fr.iut.tomodachi_game.ui.viewmodel.EquipmentListVM
 
@@ -19,32 +21,26 @@ import fr.iut.tomodachi_game.ui.viewmodel.EquipmentListVM
 class EquipmentMasterFragment : Fragment(), EquipmentListViewAdapter.Callbacks {
 
     private val equipmentListVM by viewModels<EquipmentListVM>()
-
+    private val equipmentListViewAdapter = EquipmentListViewAdapter(this)
 
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View?{
+    ): View {
 
-        val view = inflater.inflate(R.layout.fragment_equipment_master, container, false)
+        val binding = FragmentEquipmentMasterBinding.inflate(inflater)
+        binding.equipmentListVM = equipmentListVM
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        val viewAdapter = EquipmentListViewAdapter(listOf<Equipment>())
-        equipmentListVM.equipments.observe(viewLifecycleOwner, Observer {
-            viewAdapter.updateList(it)
-        })
-        viewAdapter.listener = this
+        binding.fragmentEquipmentRecyclerview.adapter = equipmentListViewAdapter
 
-        val viewManager: RecyclerView.LayoutManager = GridLayoutManager(context, 1)
-
-        view.findViewById<RecyclerView>(R.id.fragment_equipment_recyclerview).apply {
-            setHasFixedSize(false)
-            layoutManager = viewManager
-            adapter = viewAdapter
+        equipmentListVM.equipments.observe(viewLifecycleOwner) {
+            equipmentListViewAdapter.submitList(it)
         }
 
-        return view;
+        return binding.root;
     }
 
 
@@ -52,7 +48,7 @@ class EquipmentMasterFragment : Fragment(), EquipmentListViewAdapter.Callbacks {
         listener?.onEquipmentSelected(id)
     }
 
-    var listener: EquipmentMasterFragment.OnInterractionListener? = null
+    var listener: OnInterractionListener? = null
 
     interface OnInterractionListener{
         fun onEquipmentSelected(id: Long)

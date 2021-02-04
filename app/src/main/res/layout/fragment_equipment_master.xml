@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.EquipmentMasterFragment"
-    android:background="@color/red_eq">
 
-    <androidx.recyclerview.widget.RecyclerView
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragment.EquipmentMasterFragment">
+
+    <data>
+        <variable
+            name="equipmentListVM"
+            type="fr.iut.tomodachi_game.ui.viewmodel.EquipmentListVM" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment_equipment_recyclerview"/>
+        android:background="@color/red_eq">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_equipment_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="1"
+            tools:listitem="@layout/card_equipment"
+            />
 
 
-</FrameLayout>
+    </FrameLayout>
+</layout>

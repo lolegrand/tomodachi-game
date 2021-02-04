@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+
+
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:id="@+id/card_equipment"
-    android:layout_marginVertical="5dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="equipment"
+            type="fr.iut.tomodachi_game.data.Equipment" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+        <import type="fr.iut.tomodachi_game.ui.utils.Converters"/>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_equipment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        app:cardUseCompatPadding="true">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"
-            android:id="@+id/guideline1"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="@id/guideline1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/cv_equipment_nom"
-            android:background="@color/red_eq"
-            android:textColor="@color/white"
-            android:gravity="center"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
 
-        <View
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/guideline1"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/common"
-            android:id="@+id/cv_equipment_rarity"/>
+            <TextView
+                android:id="@+id/cv_equipment_nom"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="@color/red_eq"
+                android:gravity="center"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="@id/guideline1"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{equipment.nom}"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/cv_equipment_rarity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@{Converters.rarityToDrawable( equipment.rarity)}"
+                app:layout_constraintLeft_toRightOf="@id/guideline1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</layout>

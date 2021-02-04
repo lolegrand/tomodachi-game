@@ -1,45 +1,40 @@
 package fr.iut.tomodachi_game.ui.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import fr.iut.tomodachi_game.data.Character
 import fr.iut.tomodachi_game.data.Equipment
 import fr.iut.tomodachi_game.data.persistance.AppDatabase
 import fr.iut.tomodachi_game.data.persistance.AppRepository
+import kotlinx.coroutines.*
 
 class CharacterVM(idCharacter: Long): ViewModel() {
     private val myRepo = AppRepository(AppDatabase.getInstance().appDAO())
 
     val characterWithEquipment = myRepo.getCharacterWithEquipments(idCharacter)
 
-    private val _equipments = MutableLiveData<MutableList<Equipment>>()
 
-    val equipments : LiveData<MutableList<Equipment>>
-        get() = _equipments
-
-
-    init {
-        characterWithEquipment.observeForever {
-            if(it != null){
-                _equipments.value = it.equipments
-            }
-        }
+    fun deleteCharacter(){
+        characterWithEquipment.value?.character?.let { myRepo.deleteCharacter(it) }
     }
 
-    fun toEquip(equipmentId: Long){
-        val equipment = myRepo.findEquipmentById(equipmentId)
+    fun toEquip(idEquipment: Long){
 
-        equipment.observeForever {
-            characterWithEquipment.value?.toEquip(it)
-            equipments.value = equipments.value
+        lateinit var equipment: Equipment
+        val job: Job = GlobalScope.launch {
+            val equipmentSync = async {getEquipment(idEquipment)}
+            equipment = equipmentSync.await()
         }
+        runBlocking { job.join() }
+        characterWithEquipment.value?.toEquip(equipment)
 
+        myRepo.updateEquipment(equipment)
+    }
+
+    suspend fun getEquipment(idEquipment: Long): Equipment{
+        return myRepo.findEquipmentByIdSync(idEquipment)
     }
 
     fun unequip(equipmentId: Long){
+
     }
 
 

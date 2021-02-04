@@ -16,6 +16,9 @@ interface AppDAO {
     @Query("SELECT * FROM equipments WHERE equipmentId = :id")
     fun findEquipmentById(id: Long): LiveData<Equipment>
 
+    @Query("SELECT * FROM equipments WHERE equipmentId = :id")
+    fun findEquipmentByIdSync(id: Long): Equipment
+
     @Insert(onConflict = REPLACE)
     fun insertEquipment(equipment: Equipment)
 

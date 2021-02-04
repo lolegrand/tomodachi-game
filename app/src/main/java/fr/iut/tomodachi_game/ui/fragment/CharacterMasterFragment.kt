@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.iut.tomodachi_game.R
 import fr.iut.tomodachi_game.data.Character
+import fr.iut.tomodachi_game.databinding.FragmentCharacterMasterBinding
 import fr.iut.tomodachi_game.ui.utils.CharacterListViewAdapter
 import fr.iut.tomodachi_game.ui.viewmodel.CharacterListVM
 
@@ -18,36 +19,25 @@ import fr.iut.tomodachi_game.ui.viewmodel.CharacterListVM
 class CharacterMasterFragment : Fragment(), CharacterListViewAdapter.Callbacks {
 
     private val characterListVM by viewModels<CharacterListVM>()
+    private val characterListViewAdapter = CharacterListViewAdapter(this)
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_character_master, container, false)
+        val binding = FragmentCharacterMasterBinding.inflate(inflater)
+        binding.characterListVM = characterListVM
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.fragmentCharacterRecyclerView.adapter = characterListViewAdapter
 
-
-        val viewAdapter = CharacterListViewAdapter(listOf<Character>())
-        viewAdapter.listener = this
-        characterListVM.characters.observe(viewLifecycleOwner, Observer {
-            viewAdapter.updateList(it)
-        })
-
-
-        val viewManager: RecyclerView.LayoutManager = GridLayoutManager(context, 1)
-
-        view.findViewById<RecyclerView>(R.id.fragment_character_recyclerview).apply {
-            setHasFixedSize(false)
-            layoutManager= viewManager
-            adapter = viewAdapter
+        characterListVM.characters.observe(viewLifecycleOwner) {
+            characterListViewAdapter.submitList(it)
         }
 
-        return view
+        return binding.root
     }
 
-    private fun updateListView(it: List<Character>?) {
-
-    }
 
     override fun onCharacterSelected(id: Long) {
         listener?.onCharacterSelected(id)

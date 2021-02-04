@@ -19,13 +19,13 @@ data class CharacterWithEquipment (@Embedded val character: Character,
 
     fun toEquip(equipment: Equipment){
 
-        Log.e("DAC", "on "+equipment.characterId+" to " + equipment.equipmentId)
+        Log.e("DAC", "ChararacterId "+equipment.characterId+" EquipomentId: " + equipment.equipmentId)
         if(equipment.characterId == character.characterId){
-            Log.e("DAC", "Eq on")
+            Log.e("DAC", "Eq non")
             return
         }
         if(equipments.size >= 4){
-            Log.e("DAC", "Eq on2")
+            Log.e("DAC", "Eq non2")
             return
         }
 

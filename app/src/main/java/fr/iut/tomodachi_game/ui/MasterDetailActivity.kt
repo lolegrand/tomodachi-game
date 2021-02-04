@@ -16,7 +16,11 @@ import fr.iut.tomodachi_game.ui.fragment.EquipmentDetailFragment
 import fr.iut.tomodachi_game.ui.fragment.EquipmentMasterFragment
 import java.util.*
 
-class MasterDetailActivity : AppCompatActivity(), CharacterMasterFragment.OnInterractionListener, EquipmentMasterFragment.OnInterractionListener, CharacterDetailFragment.OnInterractionListener {
+class MasterDetailActivity : AppCompatActivity(),
+    CharacterMasterFragment.OnInterractionListener,
+    EquipmentMasterFragment.OnInterractionListener,
+    CharacterDetailFragment.OnInterractionListener
+   {
 
 
     private val myDatabase = AppDatabase.getInstance()
@@ -69,12 +73,15 @@ class MasterDetailActivity : AppCompatActivity(), CharacterMasterFragment.OnInte
         }
     }
 
-
     override fun onClickEquipment() {
         myMaster = EquipmentMasterFragment()
         (myMaster as EquipmentMasterFragment).listener = this
         supportFragmentManager.beginTransaction().replace(R.id.mda_fragment_master, myMaster).commit()
     }
+
+
+
+
 
 
 }

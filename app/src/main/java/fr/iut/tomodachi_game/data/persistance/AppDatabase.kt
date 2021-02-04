@@ -30,12 +30,11 @@ abstract class AppDatabase : RoomDatabase() {
                 if(instance == null)
                     synchronized(this){
                         if(instance == null)
+                            // TODO : remove in memory
                             instance = Room.inMemoryDatabaseBuilder(
                                     application.applicationContext,
                                     AppDatabase::class.java)
-                                    .allowMainThreadQueries()
                                     .build()
-                        toPopulateDB()
                     }
                 return instance!!
             }else
@@ -51,36 +50,6 @@ abstract class AppDatabase : RoomDatabase() {
             application = app
         }
 
-
-        private fun toPopulateDB() {
-            getInstance().appDAO().apply {
-                insertCharacter(Character(
-                        "Yuzaki, Nasa",
-                        Rarity.MYTHICS,
-                        Date(222222),
-                        "https://cdn.myanimelist.net/images/characters/7/395696.jpg",
-                        true))
-
-                insertCharacter(Character(
-                        "Yuzaki, Tsukasa",
-                        Rarity.LEGENDARY,
-                        Date(22222222),
-                        "https://cdn.myanimelist.net/images/characters/7/378069.jpg",
-                        true))
-
-                insertCharacter(Character(
-                        "Aurora",
-                        Rarity.COMMON,
-                        Date(2222222),
-                        "https://cdn.myanimelist.net/images/characters/4/402929.jpg",
-                        false))
-            }
-
-            getInstance().appDAO().apply {
-                insertEquipment(Equipment("Fer Bouclier",Rarity.COMMON,Date(555555), R.drawable.item__25, null))
-                insertEquipment(Equipment("Bois Bonclier",Rarity.COMMON,Date(555555), R.drawable.item__00, null))
-            }
-        }
 
 
     }

@@ -1,175 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.CharacterDetailFragment"
-    android:id="@+id/fc_rarity">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragment.CharacterDetailFragment">
+
+    <data>
+        <variable
+            name="charaterVM"
+            type="fr.iut.tomodachi_game.ui.viewmodel.CharacterVM" />
+
+        <import type="fr.iut.tomodachi_game.ui.utils.Converters"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fc_rarity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@{Converters.rarityToDrawable( charaterVM.characterWithEquipment.character.rarity)}">
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/fc_barriere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+
+            app:constraint_referenced_ids="fragment_character_iv" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.17" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.32" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="166dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            app:layout_constraintGuide_percent="0.80" />
+
+
+        <TextView
+            android:id="@+id/fragment_character_tvnom"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+
+            android:background="@drawable/textpanel"
+            android:gravity="center"
+            android:text="@{charaterVM.characterWithEquipment.character.nom}"
+            android:textColor="@color/white"
+
+            app:layout_constraintBottom_toTopOf="@id/guideline4"
+            app:layout_constraintLeft_toRightOf="@id/fc_barriere"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline3" />
+
+        <ImageView
+            android:id="@+id/fragment_character_iv"
+            android:layout_width="225dp"
+            android:layout_height="350dp"
+            android:layout_marginHorizontal="25dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline1"
+            app:imageUrl="@{charaterVM.characterWithEquipment.character.imageUrl}"/>
+
+
+        <ImageButton
+            android:id="@+id/fragment_character_equ1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
+
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintRight_toLeftOf="@id/guideline6"
+            app:layout_constraintTop_toBottomOf="@id/guideline1"
+            />
+
+        <ImageButton
+            android:id="@+id/fragment_character_equ2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"
+
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintRight_toLeftOf="@id/guideline6"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"
+
+            />
+
+        <ImageButton
+            android:id="@+id/fragment_character_equ3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline2"
+
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toRightOf="@id/guideline6"
+            app:layout_constraintTop_toBottomOf="@id/guideline1"
+
+
+            />
+
+        <ImageButton
+            android:id="@+id/fragment_character_equ4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"
+
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toRightOf="@id/guideline6"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"
+
+                  />
+
+
+        <TextView
+            android:id="@+id/fragment_character_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+
+            android:background="@drawable/textpanel"
+            android:gravity="center"
+            android:text="@{charaterVM.characterWithEquipment.character.obtainDate.toString()}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/guideline5"
+            app:layout_constraintLeft_toRightOf="@id/fc_barriere"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline4" />
+
+
+        <ImageView
+            android:id="@+id/fc_ismain"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:src="@drawable/main"
+
+            app:layout_constraintBottom_toBottomOf="@id/fragment_character_iv"
+            app:layout_constraintRight_toRightOf="@id/fragment_character_iv"
+            android:visibility="@{charaterVM.characterWithEquipment.character.main}"
+
+            />
+
+        <Button
+            android:id="@+id/fc_delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            app:layout_constraintLeft_toLeftOf="@id/fc_barriere"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline5"
+            android:onClick="@{() -> charaterVM.deleteCharacter()}"
+            />
 
 
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="end"
-        app:constraint_referenced_ids="fragment_character_iv"
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        android:id="@+id/fc_barriere"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.02"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.17"
-        android:id="@+id/guideline2"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.32"
-        android:id="@+id/guideline3"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.50"
-        android:id="@+id/guideline4"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="166dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.80"
-
-        android:id="@+id/guideline6"
-        />
-
-
-    <TextView
-        app:layout_constraintLeft_toRightOf="@id/fc_barriere"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline3"
-        app:layout_constraintBottom_toTopOf="@id/guideline4"
-
-        android:layout_marginHorizontal="10dp"
-        android:background="@drawable/textpanel"
-        android:textColor="@color/white"
-        android:gravity="center"
-
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/fragment_character_tvnom"
-        android:text="Unknow"
-        />
-
-    <ImageView
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideline1"
-        android:layout_marginHorizontal="25dp"
-        android:src="@drawable/empty_url"
-        android:layout_width="225dp"
-        android:layout_height="350dp"
-        android:id="@+id/fragment_character_iv"
-        android:background="@color/black"
-        />
-
-
-    <ImageButton
-        app:layout_constraintRight_toLeftOf="@id/guideline6"
-        app:layout_constraintTop_toBottomOf="@id/guideline1"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintDimensionRatio="1:1"
-
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        android:id="@+id/fragment_character_equ1"
-         />
-
-    <ImageButton
-        app:layout_constraintRight_toLeftOf="@id/guideline6"
-        app:layout_constraintTop_toBottomOf="@id/guideline2"
-        app:layout_constraintBottom_toTopOf="@id/guideline3"
-        app:layout_constraintDimensionRatio="1:1"
-
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        android:id="@+id/fragment_character_equ2"
-        />
-
-    <ImageButton
-        app:layout_constraintLeft_toRightOf="@id/guideline6"
-        app:layout_constraintTop_toBottomOf="@id/guideline1"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintDimensionRatio="1:1"
-
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        android:id="@+id/fragment_character_equ3"
-        />
-
-    <ImageButton
-        app:layout_constraintLeft_toRightOf="@id/guideline6"
-        app:layout_constraintTop_toBottomOf="@id/guideline2"
-        app:layout_constraintBottom_toTopOf="@id/guideline3"
-        app:layout_constraintDimensionRatio="1:1"
-
-        android:layout_height="0dp"
-        android:layout_width="0dp"
-        android:id="@+id/fragment_character_equ4"
-        android:onClick="onClickFifthEquipment"/>
-
-
-
-    <TextView
-        app:layout_constraintTop_toBottomOf="@id/guideline4"
-        app:layout_constraintLeft_toRightOf="@id/fc_barriere"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/guideline5"
-
-        android:layout_marginHorizontal="20dp"
-        android:background="@drawable/textpanel"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_character_date"
-        android:text="No date"
-        />
-
-
-
-    <ImageView
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline5"
-        app:layout_constraintLeft_toRightOf="@id/fc_barriere"
-        android:id="@+id/fc_ismain"
-
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        />
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

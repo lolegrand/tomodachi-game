@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import fr.iut.tomodachi_game.R
+import fr.iut.tomodachi_game.data.persistance.AppStub
 
 const val TYPE = "tomodachigame.TYPE"
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        AppStub().toPopulateDB()
+
         supportActionBar?.hide()
         setContentView(R.layout.activity_main)
     }
@@ -29,7 +34,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun buttonPlay(view: View) {}
+    fun buttonPlay(view: View) = startActivity(Intent(this, PlayActivity::class.java))
+
 
     fun buttonHelp(view: View) {}
 }
