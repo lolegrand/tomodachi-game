@@ -1,5 +1,6 @@
 package fr.iut.tomodachi_game.data.persistance
 
+import android.content.Context
 import fr.iut.tomodachi_game.R
 import fr.iut.tomodachi_game.data.Character
 import fr.iut.tomodachi_game.data.Equipment
@@ -25,11 +26,12 @@ class AppRepository(private val appDao: AppDAO) {
     fun deleteEquipment(equipment: Equipment) = IO_EXECUTOR.execute { appDao.deleteEquipment(equipment) }
     fun updateEquipment(equipment: Equipment) = IO_EXECUTOR.execute { appDao.updateEquipment(equipment) }
 
-    fun findEquipmentByIdSync(id: Long) = appDao.findEquipmentByIdSync(id)
+    fun findEquipmentByIdSync(id: Long) =  appDao.findEquipmentByIdSync(id)
     fun findEquipmentById(id : Long) = appDao.findEquipmentById(id)
     fun getAllEquipment() = appDao.getAllEquipment()
 
-    fun toGenerateCharactersAndEquipment() = DataGenerator().toGenerateCharacters()
+    fun toGenerateCharacters() = DataGenerator().toGenerateCharacters()
+    fun toGenerateEquipments() = DataGenerator().toGenerateEquipments()
 
 }
 
@@ -57,8 +59,8 @@ class AppStub() {
                 "https://cdn.myanimelist.net/images/characters/4/402929.jpg",
                 false))
 
-        myRepo.insertEquipment(Equipment("Bouclier en fer",Rarity.COMMON,Date(555555), R.drawable.item__25, null))
-        myRepo.insertEquipment(Equipment("Epée en fer",Rarity.COMMON,Date(555555), R.drawable.item__00, null))
+        myRepo.insertEquipment(Equipment("Bouclier en fer",Rarity.COMMON,Date(555555), R.drawable.item__04, 1))
+        myRepo.insertEquipment(Equipment("Epée en fer",Rarity.COMMON,Date(555555), R.drawable.item__06, null))
 
 
     }

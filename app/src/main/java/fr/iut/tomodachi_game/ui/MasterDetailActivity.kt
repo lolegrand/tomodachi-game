@@ -22,9 +22,6 @@ class MasterDetailActivity : AppCompatActivity(),
     CharacterDetailFragment.OnInterractionListener
    {
 
-
-    private val myDatabase = AppDatabase.getInstance()
-
     private lateinit var myDetail : Fragment
     private lateinit var myMaster : Fragment
 
@@ -48,7 +45,7 @@ class MasterDetailActivity : AppCompatActivity(),
         initView()
     }
 
-    fun initView(){
+    private fun initView(){
         if(supportFragmentManager.findFragmentById(R.id.mda_fragment_master) == null){
             supportFragmentManager.beginTransaction().add(R.id.mda_fragment_master, myMaster).commit()
             supportFragmentManager.beginTransaction().add(R.id.mda_fragment_detail, myDetail).commit()
@@ -78,10 +75,6 @@ class MasterDetailActivity : AppCompatActivity(),
         (myMaster as EquipmentMasterFragment).listener = this
         supportFragmentManager.beginTransaction().replace(R.id.mda_fragment_master, myMaster).commit()
     }
-
-
-
-
 
 
 }

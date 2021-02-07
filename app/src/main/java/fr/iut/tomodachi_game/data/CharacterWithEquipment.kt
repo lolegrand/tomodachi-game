@@ -7,31 +7,19 @@ import androidx.room.Relation
 
 data class CharacterWithEquipment (@Embedded val character: Character,
                                    @Relation(parentColumn = "characterId",
-                                             entityColumn = "equipmentId")
-                                             val equipments: MutableList<Equipment>){
+                                             entityColumn = "characterOwnerId")
+                                             var equipments: MutableList<Equipment>){
 
-    init {
-        for (eq in equipments){
-            if(eq.characterId == null)
-                equipments.remove(eq)
-        }
-    }
+
 
     fun toEquip(equipment: Equipment){
-
-        Log.e("DAC", "ChararacterId "+equipment.characterId+" EquipomentId: " + equipment.equipmentId)
-        if(equipment.characterId == character.characterId){
-            Log.e("DAC", "Eq non")
+        if(equipment.characterOwnerId == character.characterId)
             return
-        }
-        if(equipments.size >= 4){
-            Log.e("DAC", "Eq non2")
+
+        if(equipments.size >= 4)
             return
-        }
 
-        Log.e("DAC", "Eq added")
-        equipment.characterId = character.characterId
-
+        equipment.characterOwnerId = character.characterId
         equipments.add(equipment)
     }
 
@@ -41,7 +29,7 @@ data class CharacterWithEquipment (@Embedded val character: Character,
             return
         }
         equipments.remove(equipment)
-        equipment.characterId = 0
+        equipment.characterOwnerId = 0
     }
 
 

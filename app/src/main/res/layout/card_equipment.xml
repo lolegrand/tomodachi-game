@@ -45,11 +45,13 @@
             <ImageView
                 android:id="@+id/cv_equipment_rarity"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@{Converters.rarityToDrawable( equipment.rarity)}"
+                android:layout_height="0dp"
+                android:background="@{Converters.rarityToDrawable(context, equipment.rarity)}"
+                app:imageUrl="@{equipment.imageUrl}"
                 app:layout_constraintLeft_toRightOf="@id/guideline1"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

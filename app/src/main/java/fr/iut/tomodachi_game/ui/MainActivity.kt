@@ -37,5 +37,4 @@ class MainActivity : AppCompatActivity() {
     fun buttonPlay(view: View) = startActivity(Intent(this, PlayActivity::class.java))
 
 
-    fun buttonHelp(view: View) {}
 }

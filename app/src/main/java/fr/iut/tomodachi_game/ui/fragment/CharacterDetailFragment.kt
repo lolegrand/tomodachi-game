@@ -14,20 +14,28 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import fr.iut.tomodachi_game.R
 import fr.iut.tomodachi_game.data.Rarity
 import fr.iut.tomodachi_game.databinding.FragmentCharacterDetailBinding
+import fr.iut.tomodachi_game.ui.utils.CharacterListViewAdapter
+import fr.iut.tomodachi_game.ui.utils.EquipmentListViewAdapter
 import fr.iut.tomodachi_game.ui.viewmodel.CharacterVM
 import fr.iut.tomodachi_game.ui.viewmodel.EquipmentListVM
 import fr.iut.tomodachi_game.ui.viewmodel.EquipmentVM
 import fr.iut.tomodachi_game.ui.viewmodel.viewModelFactory
+import kotlinx.coroutines.*
+import okhttp3.Dispatcher
+import kotlin.coroutines.CoroutineContext
 
-class CharacterDetailFragment : Fragment() {
+class CharacterDetailFragment : Fragment(), EquipmentListViewAdapter.Callbacks, CoroutineScope by MainScope() {
 
     private var characterId : Long = 0
 
     private lateinit var characterVM: CharacterVM
+    private val equipmentListViewAdapter = EquipmentListViewAdapter(this)
 
     companion object{
         fun newInstance(characterId : Long) = CharacterDetailFragment().apply {
@@ -36,53 +44,76 @@ class CharacterDetailFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-
         val binding = FragmentCharacterDetailBinding.inflate(inflater)
         characterVM = ViewModelProvider(this, viewModelFactory { CharacterVM(characterId) }).get(CharacterVM::class.java)
         binding.charaterVM = characterVM
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.fcRecyclerview.adapter = equipmentListViewAdapter
 
-        binding.fragmentCharacterEqu1.setOnClickListener {
-            lastSelectedEquipmentPosition = 0
-            onClickEquipment(0)
+        binding.addEquipment.setOnClickListener {
+            listener?.onClickEquipment()
         }
 
-        binding.fragmentCharacterEqu2.setOnClickListener {
-            lastSelectedEquipmentPosition = 1
-            onClickEquipment(1)
-        }
+        ItemTouchHelper(EquipmentListTouchHelper()).attachToRecyclerView(binding.fcRecyclerview)
 
-        binding.fragmentCharacterEqu3.setOnClickListener {
-            lastSelectedEquipmentPosition = 2
-            onClickEquipment(2)
-        }
-
-        binding.fragmentCharacterEqu4.setOnClickListener {
-            lastSelectedEquipmentPosition = 3
-            onClickEquipment(3)
+        characterVM.characterWithEquipment.observe(viewLifecycleOwner){
+            if(it != null) {
+                equipmentListViewAdapter.submitList(it.equipments)
+            }
         }
 
         return binding.root
     }
 
 
-    private var lastSelectedEquipmentPosition = 0
-
-
-    fun equipToCharacter(idEquip: Long){
-        characterVM.toEquip(idEquip)
-    }
-
-    fun onClickEquipment(pos: Int){
-        lastSelectedEquipmentPosition = pos
-        listener?.onClickEquipment()
+    fun equipToCharacter(idEquip: Long) {
+        launch {
+            characterVM.toEquip(idEquip).join()
+            equipmentListViewAdapter.notifyDataSetChanged()
+        }
     }
 
     var listener: OnInterractionListener? = null
 
     interface OnInterractionListener{
         fun onClickEquipment()
+    }
+
+
+    private inner class EquipmentListTouchHelper: ItemTouchHelper.Callback(){
+        override fun isLongPressDragEnabled() = false
+
+        override fun getMovementFlags(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder
+        ) =
+            makeMovementFlags(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                ItemTouchHelper.START or ItemTouchHelper.END
+            )
+
+
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ) = false
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            (viewHolder as EquipmentListViewAdapter.EquipmentViewHolder).equipment?.also {
+                characterVM.unequip(it)
+            }
+        }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
+    }
+
+    override fun onEquipmentSelected(id: Long) {
+
     }
 
 

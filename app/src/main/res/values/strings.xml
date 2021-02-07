@@ -8,4 +8,9 @@
     <string name="hello_world">Hello Square World!</string>
     <string name="gacha">GACHA!!!!!</string>
     <string name="delete">Supprimer</string>
+
+    <string name="notif_title">CONGRATULATION !!!!</string>
+    <string name="notif_text">Go watch your reward and equipt your new friends ^^!</string>
+
+
 </resources>

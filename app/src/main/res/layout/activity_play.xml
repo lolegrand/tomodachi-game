@@ -1,24 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.PlayActivity">
+    <data>
+        <variable
+            name="generateDataVM"
+            type="fr.iut.tomodachi_game.ui.viewmodel.GenerateDataVM" />
+    </data>
 
-    <Button
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gacha"
-
-        android:onClick="OnClickGacha"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_gacha">
 
 
+        <ImageView
+            android:id="@+id/gacha_im_1"
+            android:layout_width="100dp"
+            android:layout_height="155dp"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/gacha_im_2"
+            android:layout_width="100dp"
+            android:layout_height="155dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:id="@+id/gacha_im_3"
+            android:layout_width="100dp"
+            android:layout_height="155dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/gacha_im_4"
+            android:layout_width="100dp"
+            android:layout_height="155dp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/gacha_im_5"
+            android:layout_width="100dp"
+            android:layout_height="155dp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickGacha"
+            android:text="@string/gacha"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <ImageView
+            android:id="@+id/gacha_im_1_eq"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/textpanel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/guideline" />
+
+        <ImageView
+            android:id="@+id/gacha_im_2_eq"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/textpanel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/gacha_im_1_eq" />
+
+        <ImageView
+            android:id="@+id/gacha_im_3_eq"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/textpanel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="@id/guideline" />
+
+        <ImageView
+            android:id="@+id/gacha_im_4_eq"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/textpanel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/gacha_im_3_eq" />
+
+        <ImageView
+            android:id="@+id/gacha_im_5_eq"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/textpanel"
+
+            app:layout_constraintBottom_toTopOf="@id/gacha_im_1_eq"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

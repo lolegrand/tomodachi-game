@@ -1,5 +1,6 @@
 package fr.iut.tomodachi_game.ui.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -48,6 +49,9 @@ class EquipmentDetailFragment : Fragment() {
 
     var listener: CharacterDetailFragment.OnInterractionListener? = null
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        equipmentVM.updateEquipment()
+    }
 
 }

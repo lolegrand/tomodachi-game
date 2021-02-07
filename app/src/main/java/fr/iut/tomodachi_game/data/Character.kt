@@ -14,4 +14,21 @@ data class Character(val nom: String,
                 val obtainDate: Date,
                 val imageUrl : String,
                 val isMain : Boolean,
-                @PrimaryKey(autoGenerate = true) val characterId: Long = NEW_CHARACTER_ID)
+                @PrimaryKey(autoGenerate = true) val characterId: Long = NEW_CHARACTER_ID){
+
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Character
+
+        if (characterId != other.characterId) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return characterId.hashCode()
+    }
+}

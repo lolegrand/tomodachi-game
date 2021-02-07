@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tomodachi_Game"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.PlayActivity"></activity>
+        <activity android:name=".ui.PlayActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ui.MasterDetailActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>

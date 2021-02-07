@@ -12,13 +12,14 @@
             type="fr.iut.tomodachi_game.ui.viewmodel.EquipmentVM"/>
 
         <import type="fr.iut.tomodachi_game.ui.utils.Converters"/>
+        <import type="android.view.View"/>
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@{Converters.rarityToDrawable( equipmentVM.equipment.rarity)}">
+        android:background="@{Converters.rarityToDrawable(context, equipmentVM.equipment.rarity)}">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"
@@ -45,7 +46,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:imageUrl="@{equipmentVM.equipment.imageUrl}"/>
 
-        <TextView
+        <EditText
             android:id="@+id/fragment_equipment_nom"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -54,10 +55,11 @@
             android:gravity="center"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/guideline2"
-            android:text="@{equipmentVM.equipment.nom}"
+            android:text="@={equipmentVM.equipment.nom}"
             app:layout_constraintLeft_toRightOf="@id/guideline1"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="@{equipmentVM.equipment != null ? View.VISIBLE : View.GONE }"/>
 
 
         <TextView
@@ -72,7 +74,8 @@
             android:text="@{equipmentVM.equipment.obtainDate.toString()}"
             app:layout_constraintLeft_toRightOf="@id/guideline1"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_equipment_nom" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_equipment_nom"
+            android:visibility="@{equipmentVM.equipment != null ? View.VISIBLE : View.GONE }"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -84,6 +87,7 @@
             app:layout_constraintLeft_toLeftOf="@id/guideline1"
             app:layout_constraintRight_toRightOf="parent"
             android:onClick="@{() -> equipmentVM.deleteEquipment()}"
+            android:visibility="@{equipmentVM.equipment != null ? View.VISIBLE : View.GONE }"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

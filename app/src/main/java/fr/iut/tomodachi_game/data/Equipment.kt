@@ -7,18 +7,22 @@ import java.util.*
 const val NEW_EQUIPMENT_ID = 0L
 
 @Entity(tableName = "equipments")
-data class Equipment(val nom: String,
+data class Equipment(var nom: String,
                      val rarity: Rarity,
                      val obtainDate: Date,
                      val imageUrl : Int,
-                     var characterId: Long?,
+                     var characterOwnerId: Long?,
                      @PrimaryKey(autoGenerate = true) val equipmentId: Long = NEW_EQUIPMENT_ID){
 
 
     override fun equals(other: Any?): Boolean {
-        if(other == null ||
-                other !is Equipment ||
-                equipmentId != other.equipmentId) return false
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Equipment
+
+        if (equipmentId != other.equipmentId) return false
+
         return true
     }
 

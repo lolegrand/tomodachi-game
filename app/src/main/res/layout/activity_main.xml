@@ -64,18 +64,7 @@
         android:id="@+id/ma_button_play"
         android:onClick="buttonPlay"/>
 
-    <Button
-        app:layout_constraintLeft_toLeftOf="@id/guideline1"
-        app:layout_constraintRight_toRightOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/ma_button_play"
-        app:layout_constraintHorizontal_weight="1"
 
-        android:background="@drawable/button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/ma_button_help"
-        android:id="@+id/ma_button_help"
-        android:onClick="buttonHelp"/>
 
     <Space
         app:layout_constraintTop_toTopOf="parent"

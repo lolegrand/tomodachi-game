@@ -6,11 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import fr.iut.tomodachi_game.R
-import fr.iut.tomodachi_game.data.Character
 import fr.iut.tomodachi_game.databinding.FragmentCharacterMasterBinding
 import fr.iut.tomodachi_game.ui.utils.CharacterListViewAdapter
 import fr.iut.tomodachi_game.ui.viewmodel.CharacterListVM
@@ -45,10 +40,9 @@ class CharacterMasterFragment : Fragment(), CharacterListViewAdapter.Callbacks {
 
     var listener: OnInterractionListener? = null
 
-    interface OnInterractionListener{
+    interface OnInterractionListener {
         fun onCharacterSelected(id: Long)
     }
-
 
 
 
