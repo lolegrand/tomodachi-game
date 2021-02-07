@@ -6,10 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,6 +25,7 @@ import fr.iut.tomodachi_game.ui.viewmodel.EquipmentVM
 import fr.iut.tomodachi_game.ui.viewmodel.viewModelFactory
 import kotlinx.coroutines.*
 import okhttp3.Dispatcher
+import java.time.Duration
 import kotlin.coroutines.CoroutineContext
 
 class CharacterDetailFragment : Fragment(), EquipmentListViewAdapter.Callbacks, CoroutineScope by MainScope() {
@@ -70,6 +68,7 @@ class CharacterDetailFragment : Fragment(), EquipmentListViewAdapter.Callbacks, 
         launch {
             characterVM.toEquip(idEquip).join()
             equipmentListViewAdapter.notifyDataSetChanged()
+            Toast.makeText(context, "Equipment Added", Toast.LENGTH_SHORT ).show()
         }
     }
 
@@ -102,6 +101,7 @@ class CharacterDetailFragment : Fragment(), EquipmentListViewAdapter.Callbacks, 
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             (viewHolder as EquipmentListViewAdapter.EquipmentViewHolder).equipment?.also {
                 characterVM.unequip(it)
+                Toast.makeText(context, "Equipment Deleted", Toast.LENGTH_SHORT ).show()
             }
         }
 
