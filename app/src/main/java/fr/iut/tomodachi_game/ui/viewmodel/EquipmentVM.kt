@@ -17,7 +17,7 @@ class EquipmentVM(private val idEquipment: Long) : ViewModel() {
     }
 
     fun updateEquipment() = equipment.value?.let {
-        if(it.nom.isBlank())
+        if(it.name.isBlank())
             false
         else{
             viewModelScope.launch {

@@ -9,12 +9,12 @@ import java.util.*
 const val NEW_CHARACTER_ID = 0L
 
 @Entity(tableName = "characters")
-data class Character(val nom: String,
-                val rarity: Rarity,
-                val obtainDate: Date,
-                val imageUrl : String,
-                val isMain : Boolean,
-                @PrimaryKey(autoGenerate = true) val characterId: Long = NEW_CHARACTER_ID){
+data class Character(val name: String,
+                     val rarity: Rarity,
+                     val obtainDate: Date,
+                     val imageUrl : String,
+                     val isMain : Boolean,
+                     @PrimaryKey(autoGenerate = true) val characterId: Long = NEW_CHARACTER_ID){
 
 
     override fun equals(other: Any?): Boolean {

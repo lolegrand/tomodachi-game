@@ -107,20 +107,17 @@ class PlayActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
 
     private fun createNotificationChannel() {
+        
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, "", importance)
+            val channel = NotificationChannel(CHANNEL_ID, "", NotificationManager.IMPORTANCE_DEFAULT)
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
-
-
     }
 
     private fun gachaNotify() {
-        createNotificationChannel()
+        //createNotificationChannel()
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.common)
             .setContentTitle(resources.getString(R.string.notif_title))

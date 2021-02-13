@@ -7,7 +7,7 @@ import java.util.*
 const val NEW_EQUIPMENT_ID = 0L
 
 @Entity(tableName = "equipments")
-data class Equipment(var nom: String,
+data class Equipment(var name: String,
                      val rarity: Rarity,
                      val obtainDate: Date,
                      val imageUrl : Int,

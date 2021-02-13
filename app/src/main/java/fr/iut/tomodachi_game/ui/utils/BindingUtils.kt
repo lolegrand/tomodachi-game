@@ -6,14 +6,12 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
 import com.squareup.picasso.Picasso
 import fr.iut.tomodachi_game.R
 import fr.iut.tomodachi_game.data.CharacterWithEquipment
-import fr.iut.tomodachi_game.data.Equipment
 import fr.iut.tomodachi_game.data.Rarity
 
 object Adapters {
@@ -52,8 +50,8 @@ object Adapters {
     fun loadEquipment(view: ImageButton, newValue: CharacterWithEquipment?){
         if(newValue == null) return
 
-        Log.e("DAC", "${newValue.character.nom} :")
-        newValue.equipments.forEach{Log.e("DAC", "-${it.nom}")}
+        Log.e("DAC", "${newValue.character.name} :")
+        newValue.equipments.forEach{Log.e("DAC", "-${it.name}")}
 
 
     }

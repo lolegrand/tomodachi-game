@@ -40,7 +40,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/guideline1"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="@{character.nom}"/>
+                android:text="@{character.name}"/>
 
             <ImageView
                 android:id="@+id/cv_character_rarity"
