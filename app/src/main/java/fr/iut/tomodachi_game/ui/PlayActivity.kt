@@ -61,19 +61,19 @@ class PlayActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         setContentView(R.layout.activity_play)
 
         imChar = listOf<ImageView>(
-            findViewById<ImageView>(R.id.gacha_im_1),
-            findViewById<ImageView>(R.id.gacha_im_2),
-            findViewById<ImageView>(R.id.gacha_im_3),
-            findViewById<ImageView>(R.id.gacha_im_4),
-            findViewById<ImageView>(R.id.gacha_im_5)
+            findViewById(R.id.gacha_im_1),
+            findViewById(R.id.gacha_im_2),
+            findViewById(R.id.gacha_im_3),
+            findViewById(R.id.gacha_im_4),
+            findViewById(R.id.gacha_im_5)
         )
 
         imEqu = listOf<ImageView>(
-            findViewById<ImageView>(R.id.gacha_im_1_eq),
-            findViewById<ImageView>(R.id.gacha_im_2_eq),
-            findViewById<ImageView>(R.id.gacha_im_3_eq),
-            findViewById<ImageView>(R.id.gacha_im_4_eq),
-            findViewById<ImageView>(R.id.gacha_im_5_eq)
+            findViewById(R.id.gacha_im_1_eq),
+            findViewById(R.id.gacha_im_2_eq),
+            findViewById(R.id.gacha_im_3_eq),
+            findViewById(R.id.gacha_im_4_eq),
+            findViewById(R.id.gacha_im_5_eq)
         )
 
     }

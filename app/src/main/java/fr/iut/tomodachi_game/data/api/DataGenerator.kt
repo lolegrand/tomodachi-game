@@ -117,40 +117,9 @@ class DataGenerator {
         R.drawable.item__70,
         R.drawable.item__71)
 
-  /*  fun toGenerateCharacters(): List<Character>{
-        val url = "https://api.jikan.moe/"
-        var characList = listOf<Character>()
-
-        val retrofit = Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(MoshiConverterFactory.create()).build()
-        val service = retrofit.create(CharacterService::class.java)
-        val characterRequest = service.listCharacter(animId.random())
-
-
-
-        characterRequest.enqueue(object : Callback<CharactersResponse> {
-            override fun onResponse(
-                    call: Call<CharactersResponse>,
-                    response: Response<CharactersResponse>
-            ) {
-                val allCharacter = response.body()
-                if (allCharacter != null){
-                    characList = parseCharacters(allCharacter.characters)
-
-
-                }else{
-                    Log.e("DAC", "404")
-                }
-            }
-            override fun onFailure(call: Call<CharactersResponse>, t: Throwable) {
-                Log.e("DAC", "Request failed")
-            }
-        })
-
-        return characList
-    }*/
-
+    /**
+     * Fonction pour générer tout les personnage
+     */
     fun toGenerateCharacters(): List<Character>{
         val url = "https://api.jikan.moe/"
         var characList = listOf<Character>()
@@ -171,7 +140,9 @@ class DataGenerator {
         return characList
     }
 
-
+    /**
+     * Fonction pour parser tout les CharacterAPI en Character et les sélectionners aléatoirement
+     */
     private fun parseCharacters(characters : List<CharacterAPI>) : List<Character> {
         val characList = mutableListOf<Character>()
         var isMain = false
@@ -189,7 +160,9 @@ class DataGenerator {
         return characList
     }
 
-
+    /**
+     * Fonction pour générer automatiquement des équipements aléatoires
+     */
     fun toGenerateEquipments(): List<Equipment>{
         val equipmentList = mutableListOf<Equipment>()
         for (i in 0..4) {

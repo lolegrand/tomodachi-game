@@ -2,6 +2,9 @@ package fr.iut.tomodachi_game.data
 
 import kotlin.random.Random
 
+/**
+ * Enumération des rareters
+ */
 enum class Rarity {
     COMMON,
     UNCOMMON,

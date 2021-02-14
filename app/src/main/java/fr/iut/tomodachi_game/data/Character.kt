@@ -8,6 +8,10 @@ import java.util.*
 
 const val NEW_CHARACTER_ID = 0L
 
+
+/**
+ * Classe de personnage
+ */
 @Entity(tableName = "characters")
 data class Character(val name: String,
                      val rarity: Rarity,

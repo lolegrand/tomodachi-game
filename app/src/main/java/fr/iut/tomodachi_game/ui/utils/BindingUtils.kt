@@ -2,10 +2,12 @@ package fr.iut.tomodachi_game.ui.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.BindingConversion
@@ -13,6 +15,10 @@ import com.squareup.picasso.Picasso
 import fr.iut.tomodachi_game.R
 import fr.iut.tomodachi_game.data.CharacterWithEquipment
 import fr.iut.tomodachi_game.data.Rarity
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 object Adapters {
     @JvmStatic
@@ -74,5 +80,17 @@ object Converters {
             Rarity.LEGENDARY -> ResourcesCompat.getDrawable(context.resources,R.drawable.legendary,context.theme)!!
             else -> ResourcesCompat.getDrawable(context.resources,R.drawable.common,context.theme)!!
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @JvmStatic
+    @BindingConversion
+    fun dateToString(value: Date?): String {
+        if(value == null)
+            return ""
+
+        val date = Instant.ofEpochMilli(value.time).atZone(ZoneId.systemDefault()).toLocalDate()
+
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
     }
 }

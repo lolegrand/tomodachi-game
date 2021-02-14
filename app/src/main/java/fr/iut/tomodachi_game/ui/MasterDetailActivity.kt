@@ -48,7 +48,14 @@ class MasterDetailActivity : AppCompatActivity(),
     private fun initView(){
         if(supportFragmentManager.findFragmentById(R.id.mda_fragment_master) == null){
             supportFragmentManager.beginTransaction().add(R.id.mda_fragment_master, myMaster).commit()
+        }else{
+            supportFragmentManager.beginTransaction().replace(R.id.mda_fragment_master, myMaster).commit()
+        }
+
+        if(supportFragmentManager.findFragmentById(R.id.mda_fragment_detail) == null){
             supportFragmentManager.beginTransaction().add(R.id.mda_fragment_detail, myDetail).commit()
+        }else{
+            supportFragmentManager.beginTransaction().replace(R.id.mda_fragment_detail, myDetail).commit()
         }
     }
 

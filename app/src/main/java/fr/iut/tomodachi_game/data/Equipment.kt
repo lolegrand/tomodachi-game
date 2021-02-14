@@ -6,6 +6,10 @@ import java.util.*
 
 const val NEW_EQUIPMENT_ID = 0L
 
+
+/**
+ * Classe d'équipement
+ */
 @Entity(tableName = "equipments")
 data class Equipment(var name: String,
                      val rarity: Rarity,
